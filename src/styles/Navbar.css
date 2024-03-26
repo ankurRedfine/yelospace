@@ -1,0 +1,28 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 10px;
+    /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
+   
+  }
+
+  .logo {
+    color: #f5c000;
+    margin-left: 10px;
+  }
+
+  .nav-links {
+    display: flex;
+    list-style-type: none;
+  }
+
+  .nav-links li {
+    margin-right: 20px;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: #333;
+  }
