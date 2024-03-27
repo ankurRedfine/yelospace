@@ -8,7 +8,7 @@ const Navbar = () => {
       <ul className="nav-links">
         <li><a href="#">Legal Support</a></li>
         <li><a href="#">Community Board</a></li>
-        <li><a href="#">Be Our Partner</a></li>
+        <li><a href="/provider-login">Be Our Partner</a></li>
         <li className="hamburger-menu">
           <div className="material-symbols-outlined">menu</div>
         </li>

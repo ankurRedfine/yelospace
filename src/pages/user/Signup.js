@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../styles/SignUp.css"; 
-import loginImg from "../assets/loginImage.jpeg"; 
-import Navbar from "../layouts/Navbar";
+import "../../styles/SignUp.css"; 
+import loginImg from "../../assets/loginImage.jpeg"; 
+import Navbar from "../../layouts/Navbar";
 function SignUp() {
   const [formData, setFormData] = useState({
     name: "",
@@ -27,7 +27,7 @@ function SignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:8080/sign-up/user", {
+      const response = await fetch("http://13.50.249.60:8080/sign-up/user", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -51,7 +51,7 @@ function SignUp() {
       <div className="left-panel">
         <img src={loginImg} alt="Left Panel Image" />
       </div>
-      <div className="right-panel">
+      <div className="right">
         <h1>Yelospace Logo</h1>
         <h3>Sign Up</h3>
         <form onSubmit={handleSubmit}>

@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../styles/VerifyOTP.css'; // Import CSS file for styling
-import loginImg  from "../assets/loginImage.jpeg"
-import Navbar from '../layouts/Navbar';
-function VerifyOTP() {
+import '../../styles/VerifyOTP.css'; 
+import loginImg  from "../../assets/loginImage.jpeg"
+import Navbar from '../../layouts/Navbar';
+function VerifyEmail() {
   const [otp, setOtp] = useState('');
-  const navigate = useNavigate(); // Use useNavigate hook for navigation
-
+  const navigate = useNavigate(); 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://yourapi.com/verify-otp', {
+      const response = await fetch('localhost:8080/send-otp/{email}', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -19,7 +18,7 @@ function VerifyOTP() {
       });
       if (response.ok) {
         // Redirect to appropriate page upon successful OTP verification
-        navigate('/reset-password'); // Use navigate function instead of history.push
+        navigate('/reset-password'); 
       } else {
         console.error('OTP verification failed');
       }
@@ -33,9 +32,9 @@ function VerifyOTP() {
   };
 
   return (
-  <>
-  <Navbar/>
-  <div className="verify-otp-container">
+   <>
+   <Navbar/>
+    <div className="verify-otp-container">
       <div className="left-panel">
       <img src={loginImg} alt="Left Panel Image" />
       </div>
@@ -43,7 +42,7 @@ function VerifyOTP() {
         <h1>Yelospace Logo</h1>
         
         <form onSubmit={handleSubmit}>
-        <h3 style={{ marginLeft: '40px' }}>Enter OTP</h3>
+        <h3 style={{ marginLeft: '10px' }}>A Verification OTP has been sent to your registered Email ID.</h3>
 
           <div className="otp-inputs">
             <input type="text" maxLength="1" value={otp[0] || ''} onChange={handleChange} />
@@ -51,15 +50,15 @@ function VerifyOTP() {
             <input type="text" maxLength="1" value={otp[2] || ''} onChange={handleChange} />
             <input type="text" maxLength="1" value={otp[3] || ''} onChange={handleChange} />
           </div>
-          <button type="submit">Verify OTP</button>
+          <button type="submit">Verify Email</button>
         </form>
         <div className="back-to-login">
           <a href="/">Back to Login</a>
         </div>
       </div>
     </div>
-  </>
+   </>
   );
 }
 
-export default VerifyOTP;
+export default VerifyEmail;

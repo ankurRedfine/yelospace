@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../styles/ResetPassword.css';
-import loginImg from "../assets/loginImage.jpeg";
-import Navbar from '../layouts/Navbar';
+import '../../styles/ResetPassword.css';
+import loginImg from "../../assets/loginImage.jpeg";
+import Navbar from '../../layouts/Navbar';
 
-function ResetPassword() {
+function ProviderResetPassword() {
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const navigate = useNavigate();
@@ -12,7 +12,7 @@ function ResetPassword() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:8080/reset-pass/user', {
+      const response = await fetch('http://13.50.249.60:8080/reset-pass/provider', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -20,7 +20,7 @@ function ResetPassword() {
         body: JSON.stringify({ newPassword, confirmPassword })
       });
       if (response.ok) {
-        navigate('/login');
+        navigate('/provider-login');
       } else {
         console.error('Failed to reset password');
       }
@@ -53,7 +53,7 @@ function ResetPassword() {
           <button type="submit">Reset Password</button>
         </form>
         <div className="back-to-login">
-          <a href="/">Back to Login</a>
+          <a href="/provider-login">Back to Login</a>
         </div>
       </div>
     </div>
@@ -61,4 +61,4 @@ function ResetPassword() {
     );
 }
 
-export default ResetPassword;
+export default ProviderResetPassword;

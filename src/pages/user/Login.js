@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../styles/Login.css'; 
-import "../styles/Global.css"
-import loginImg  from "../assets/loginImage.jpeg"
-import Navbar from '../layouts/Navbar';
+import '../../styles/Login.css'; 
+import "../../styles/Global.css"
+import loginImg  from "../../assets/loginImage.jpeg"
+import Navbar from '../../layouts/Navbar';
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -15,7 +15,8 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('  http://13.48.134.84:8080/authenticate/', {
+      console.log("clicked",formData)
+      const response = await fetch('  http://13.50.249.60:8080/authenticate/user', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

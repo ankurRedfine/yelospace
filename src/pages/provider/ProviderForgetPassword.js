@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../styles/ForgotPassword.css' // Import CSS file for styling
-import loginImg  from "../assets/loginImage.jpeg"
-import Navbar from '../layouts/Navbar';
+import '../../styles/ForgotPassword.css' 
+import loginImg  from "../../assets/loginImage.jpeg"
+import Navbar from '../../layouts/Navbar';
 function ForgotPassword() {
   const [email, setEmail] = useState('');
-  const navigate = useNavigate(); // Use useNavigate hook
+  const navigate = useNavigate(); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,7 +18,7 @@ function ForgotPassword() {
         body: JSON.stringify({ email })
       });
       if (response.ok) {
-        navigate('/reset-password-confirmation'); // Use navigate function instead of history.push
+        navigate('/provider-verify-otp'); 
       } else {
         console.error('Failed to send reset link');
       }
@@ -54,7 +54,7 @@ function ForgotPassword() {
           
         </form>
         <div className="back-to-login">
-          <a href="/">Back to Login</a>
+          <a href="/provider-login">Back to Login</a>
         </div>
       </div>
     </div>

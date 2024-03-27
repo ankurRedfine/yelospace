@@ -12,23 +12,31 @@
     height: 100vh;
   }
   
-  .right-panel {
+  .right {
     width: 30%;
     padding: 20px;
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 5px;
+    height: 100vh !important;
+    overflow: scroll;
+
+  }
+  ::-webkit-scrollbar {
+    width: 0px;
   }
   
-  .right-panel h1 {
-    font-size: 24px;
-    /* margin-bottom: 10px; */
-    margin-top: 10px;
+  .right h1 {
+    font-size: 40px;
+    margin-bottom: 20px;
+    margin-top: 80px;
+    text-align: center;
+    color: #F5C000;
   }
   
-  .right-panel h3 {
-    font-size: 20px;
-    margin-bottom: 10px;
+  .right h3 {
+    font-size: 16px;
+    margin-bottom: 20px;
     text-align: left;
   }
   
@@ -74,8 +82,9 @@ background-color: #D9D9D999;
     margin-right: 10px; 
     font-size: 16px;
   }
-  
-  .checkbox-group input[type="checkbox"] {
+  .checkbox-group{
     display: flex;
-    vertical-align: middle;
+  }
+  .checkbox-group input[type="checkbox"] {
+    margin: 0 5px;
   }
