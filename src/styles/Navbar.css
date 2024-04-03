@@ -10,6 +10,11 @@
     z-index: 2 !important;
 }
    
+
+.hamburger-menu {
+  color: #f5c000;
+  cursor: pointer;
+}
   
 
   .logo {
@@ -24,9 +29,46 @@
 
   .nav-links li {
     margin-right: 20px;
+    text-align: center;
   }
 
   .nav-links a {
     text-decoration: none;
     color: #333;
+    text-align: center;
   }
+  .error {
+    color: red;
+    font-size: 14px;
+  }
+
+  .menu-options {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+  }
+  
+  .menu-options ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .menu-options ul li {
+    padding: 0.5rem 1rem;
+  }
+  
+  .menu-options ul li a {
+    color: #333;
+    text-decoration: none;
+  }
+  
+  .menu-options ul li a:hover {
+    color:#f5c000
+  }
+  

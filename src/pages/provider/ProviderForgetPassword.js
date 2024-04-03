@@ -17,7 +17,7 @@ function ForgotPassword() {
         },
         body: JSON.stringify({ email })
       });
-      if (response.ok) {
+      if (response.status === 200) {
         navigate('/provider-verify-otp'); 
       } else {
         console.error('Failed to send reset link');

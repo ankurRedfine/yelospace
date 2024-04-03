@@ -1,23 +1,28 @@
+// SignUp.js
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/SignUp.css";
 import loginImg from "../../assets/loginImage.jpeg";
 import Navbar from "../../layouts/Navbar";
-function ProviderSignUp() {
+
+function SignUp() {
   const [formData, setFormData] = useState({
-    name: "",
+    firstName: "",
     lastName: "",
     email: "",
-    mobileNumber: "",
+    mobile: "",
     password: "",
     confirmPassword: "",
     termsAndConditions: false,
-    licesenceNo : "",
-    provider: "",
     address: "",
+    providerType: "",
+    licenseNo: "",
+    
   });
 
+   const [submitted, setSubmitted] = useState(false); // State to track form submission
   const navigate = useNavigate();
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     const newValue = type === "checkbox" ? checked : value;
@@ -27,21 +32,40 @@ function ProviderSignUp() {
     });
   };
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+   setSubmitted(true)
+    
+
+    // Validation checks on client side
+    if (formData.password !== formData.confirmPassword) {
+      console.error("Passwords do not match");
+      return;
+    }
+
+    if (!formData.termsAndConditions) {
+      console.error("Please accept the terms and conditions");
+      return;
+    }
+
     try {
-      const response = await fetch(
-        "http://13.50.249.60:8080/sign-up/provider",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
-      if (response.ok) {
-        navigate("/provider-login");
+      // Exclude confirmPassword and termsAndConditions from formData
+      const { confirmPassword, termsAndConditions, ...postData } = formData;
+
+      const response = await fetch("http://13.50.249.60:8080/send-otp/{email}", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(postData),
+      });
+
+      if (response.status === 200) {
+
+        localStorage.setItem("formdata", JSON.stringify(postData))
+        navigate("/provider-verify-email");
       } else {
         console.error("Failed to sign up");
       }
@@ -59,17 +83,21 @@ function ProviderSignUp() {
         </div>
         <div className="right">
           <h1>Yelospace Logo</h1>
-          <h3>Sign Up as Provider</h3>
+          <h3>Sign Up</h3>
           <form onSubmit={handleSubmit}>
             <div className="input-group">
               <input
                 type="text"
-                id="name"
-                name="name"
-                placeholder="Name"
-                value={formData.name}
+                id="firstname"
+                name="firstName"
+                placeholder="First Name"
+                value={formData.firstName}
                 onChange={handleChange}
+                required
               />
+              {submitted && !formData.firstName && (
+                <span className="error">First Name is required</span>
+              )}
             </div>
             <div className="input-group">
               <input
@@ -79,9 +107,12 @@ function ProviderSignUp() {
                 placeholder="Last Name"
                 value={formData.lastName}
                 onChange={handleChange}
+                required
               />
+              {submitted && !formData.lastName && (
+                <span className="error">Last Name is required</span>
+              )}
             </div>
-           
             <div className="input-group">
               <input
                 type="email"
@@ -90,52 +121,75 @@ function ProviderSignUp() {
                 placeholder="Email"
                 value={formData.email}
                 onChange={handleChange}
+                required
               />
-            </div> <div className="input-group">
-              <input
-                type="text"
-                id="licesenceNo"
-                name="licesenceNo"
-                placeholder="Licesence No"
-                value={formData.licesenceNo}
-                onChange={handleChange}
-              />
+              {submitted && !formData.email && (
+                <span className="error">Email is required</span>
+              )}
             </div>
-
             <div className="input-group">
               <input
                 type="tel"
-                id="mobileNumber"
-                name="mobileNumber"
+                id="mobile"
+                name="mobile"
                 placeholder="Mobile Number"
-                value={formData.mobileNumber}
+                value={formData.mobile}
                 onChange={handleChange}
+                required
               />
+              {submitted && !formData.mobile && (
+                <span className="error">Mobile Number is required</span>
+              )}
             </div>
-
-          
-            
-            <div className="input-group">
-              <input
-                type="text"
-                id="provider"
-                name="provider"
-                placeholder="Provider Type"
-                value={formData.provider }
-                onChange={handleChange}
-              />
-            </div>
-
             <div className="input-group">
               <input
                 type="text"
                 id="address"
                 name="address"
                 placeholder="Address"
-                value={formData.address }
+                value={formData.address}
                 onChange={handleChange}
+                required
               />
+              {submitted && !formData.mobile && (
+                <span className="error">Address is required</span>
+              )}
             </div>
+
+            <div className="input-group">
+              <input
+                type="text"
+                id="licenseNo"
+                name="licenseNo"
+                placeholder="License No"
+                value={formData.licenseNo}
+                onChange={handleChange}
+                required
+              />
+              {submitted && !formData.mobile && (
+                <span className="error">License Number is required</span>
+              )}
+            </div>
+
+            <div className="input-group">
+  <select
+    className="select-input"
+    id="providerType"
+    name="providerType"
+    value={formData.providerType}
+    onChange={handleChange}
+    required
+  >
+    <option value=""> Provider Type</option>
+    <option value="1">Brokrage</option>
+    <option value="2">Home</option>
+    
+  </select>
+  {submitted && !formData.mobile && (
+    <span className="error">Property Type is required</span>
+  )}
+</div>
+
             <div className="input-group">
               <input
                 type="password"
@@ -144,7 +198,11 @@ function ProviderSignUp() {
                 placeholder="Password"
                 value={formData.password}
                 onChange={handleChange}
+                required
               />
+              {submitted && !formData.password && (
+                <span className="error">Password is required</span>
+              )}
             </div>
             <div className="input-group">
               <input
@@ -154,22 +212,27 @@ function ProviderSignUp() {
                 placeholder="Confirm Password"
                 value={formData.confirmPassword}
                 onChange={handleChange}
+                required
               />
+              {submitted && !formData.confirmPassword && (
+                <span className="error">Confirm Password is required</span>
+              )}
             </div>
             <div className="checkbox-group">
-              <span>
-                {" "}
-                <input
-                  type="checkbox"
-                  id="termsAndConditions"
-                  name="termsAndConditions"
-                  checked={formData.termsAndConditions}
-                  onChange={handleChange}
-                />
-              </span>
-              <span>
-                <p> I accept the terms and conditions and privacy policy</p>
-              </span>
+              <input
+                type="checkbox"
+                id="termsAndConditions"
+                name="termsAndConditions"
+                checked={formData.termsAndConditions}
+                onChange={handleChange}
+                required
+              />
+              <label htmlFor="termsAndConditions">
+                I accept the terms and conditions and privacy policy
+              </label>
+              {submitted && !formData.termsAndConditions && (
+                <span className="error">Please accept the terms and conditions</span>
+              )}
             </div>
             <button type="submit">Sign Up</button>
           </form>
@@ -179,4 +242,4 @@ function ProviderSignUp() {
   );
 }
 
-export default ProviderSignUp;
+export default SignUp;

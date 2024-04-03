@@ -10,14 +10,14 @@ function ProviderVerifyOTP() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://yourapi.com/verify-otp', {
+      const response = await fetch('http://13.50.249.60:8080/send-otp/{email}', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({ otp })
       });
-      if (response.ok) {
+      if (response.status=== 200) {
         // Redirect to appropriate page upon successful OTP verification
         navigate('/reset-password'); // Use navigate function instead of history.push
       } else {

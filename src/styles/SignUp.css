@@ -50,7 +50,7 @@
     font-size: 16px;
   }
   
-  .input-group input {
+  .input-group input  {
     width: 316px;
     height: 46px;
     flex-shrink: 0;
@@ -59,13 +59,25 @@ background-color: #D9D9D999;
     border-radius: 5px;
     font-size: 16px;
   }
+
+  .select-input {
+    width: 100%;
+    height: 46px;
+    flex-shrink: 0;
+    background-color: #D9D9D999;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
   
   .checkbox-group label {
-    font-size: 16px;
+    font-size: 24px;
+    margin-top: 10px; /* Adjust this value as needed */
   }
   
   button[type="submit"] {
     padding: 10px;
+    margin-top: 15px;
     margin-bottom: 10px;
     border: none;
     cursor: pointer;
@@ -88,3 +100,9 @@ background-color: #D9D9D999;
   .checkbox-group input[type="checkbox"] {
     margin: 0 5px;
   }
+
+  .error {
+    color: red;
+    font-size: 14px;
+  }
+  
